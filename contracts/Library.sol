@@ -13,6 +13,9 @@ contract Library is Ownable {
         uint256 copies;
     }
 
+    // Tracks the amount of books in the library
+    uint256 public booksInLibrary;
+
     //Mapping that helps to manage how many copies of each book are out.
     mapping(uint256 => uint256) public bookIdToCopiesOut;
 
@@ -32,6 +35,7 @@ contract Library is Ownable {
     function addNewBook(string memory _name, uint256 _copies) public onlyOwner {
         Book memory _book = Book(_name, _copies);
         bookArray.push(_book);
+        booksInLibrary += 1;
         //bookIdToCopiesOut[bookArray.length-1]=0;
         emit NewBook(bookArray.length - 1, _name, _copies);
     }
